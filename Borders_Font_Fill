@@ -1,0 +1,82 @@
+Sub CycleBorders()
+    If Selection.Borders(xlEdgeBottom).LineStyle = xlNone Then
+        Selection.Borders(xlEdgeBottom).Weight = xlThin
+    ElseIf Selection.Borders(xlEdgeBottom).Weight = xlThin Then
+        Selection.Borders(xlEdgeBottom).Weight = xlMedium
+    Else
+    Selection.Borders(xlDiagonalDown).LineStyle = xlNone
+    Selection.Borders(xlDiagonalUp).LineStyle = xlNone
+    Selection.Borders(xlEdgeLeft).LineStyle = xlNone
+    Selection.Borders(xlEdgeTop).LineStyle = xlNone
+    Selection.Borders(xlEdgeBottom).LineStyle = xlNone
+    Selection.Borders(xlEdgeRight).LineStyle = xlNone
+    Selection.Borders(xlInsideVertical).LineStyle = xlNone
+    Selection.Borders(xlInsideHorizontal).LineStyle = xlNone
+            
+    End If
+    
+End Sub
+
+Sub RightBorder()
+
+    Selection.Borders(xlEdgeRight).Weight = xlThin
+
+End Sub
+
+Sub LeftBorder()
+
+    Selection.Borders(xlEdgeLeft).Weight = xlThin
+
+End Sub
+
+Sub TopBorder()
+
+    Selection.Borders(xlEdgeTop).Weight = xlThin
+
+End Sub
+
+
+Sub Key_Shortcuts()
+
+Application.OnKey "^%{Down}", "CycleBorders"
+Application.OnKey "^%{Left}", "LeftBorder"
+Application.OnKey "^%{Up}", "TopBorder"
+Application.OnKey "^%{Right}", "RightBorder"
+Application.OnKey "^+r", "CycleFillColors"
+Application.OnKey "^+c", "CycleTextColors"
+
+
+End Sub
+
+Sub CycleFillColors()
+
+Select Case Selection.Interior.Color
+    Case RGB(255, 255, 255)
+        Selection.Interior.Color = RGB(255, 255, 0)
+    Case RGB(255, 255, 0)
+        Selection.Interior.Color = RGB(255, 0, 0)
+    Case RGB(255, 0, 0)
+        Selection.Interior.Color = RGB(146, 208, 80)
+    Case Else
+        Selection.Interior.Color = RGB(255, 255, 255)
+        
+        
+End Select
+
+
+End Sub
+
+Sub CycleTextColors()
+
+Select Case Selection.Font.Color
+    Case RGB(0, 0, 0)
+        Selection.Font.Color = RGB(0, 112, 192)
+    Case RGB(0, 112, 192)
+        Selection.Font.Color = RGB(153, 51, 102)
+    Case Else
+        Selection.Font.Color = RGB(0, 0, 0)
+        
+        
+End Select
+
+End Sub
