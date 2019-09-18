@@ -1,0 +1,31 @@
+Public Sub RefreshWorkbook()
+Dim Refreshbutton As CommandBarButton
+Set Refreshbutton = Application.CommandBars.FindControl(Tag:="menurefreshdatabook")
+Refreshbutton.Execute
+End Sub
+
+
+Sub Auto_generate()
+    Application.ScreenUpdating = False
+    Application.DisplayStatusBar = False
+    RefreshPrices_1
+    RefreshWorkbook
+    Create_pub_xlsx
+    Create_pub_pdf
+    file_date = CStr(Format(Range("Q6"), "yyyymmdd"))
+    FName = "Comps - Consolidated_Working_" & file_date
+    relativePath = ThisWorkbook.Path & "\" & FName
+    ThisWorkbook.SaveAs Filename:=relativePath
+    Application.DisplayStatusBar = True
+    Application.ScreenUpdating = True
+    
+End Sub
+
+Sub Run_at_4_21()
+    Application.OnTime TimeValue("17:25:20"), "Auto_generate"
+    
+    
+End Sub
+
+
+
