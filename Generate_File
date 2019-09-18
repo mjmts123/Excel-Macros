@@ -1,3 +1,32 @@
+Sub AttachMultipleFilesToEmail()
+
+Dim outlookApp As Outlook.Application
+Dim myMail As Outlook.MailItem
+
+Set outlookApp = New Outlook.Application
+Set myMail = outlookApp.CreateItem(olMailItem)
+
+mydate = CStr(Format(Date, "yyyymmdd"))
+emaildate = CStr(Format(Date, "mm/dd"))
+
+pubPDF = ThisWorkbook.Path & "\" & "Comps - Consolidated_Atkin_Pub " & mydate & ".pdf"
+pubExcel = ThisWorkbook.Path & "\" & "Comps - Consolidated_Atkin_Pub " & mydate & ".xlsx"
+
+With myMail
+    .Subject = "Comps Sheet " & emaildate
+    .To = "michael.j.tang@rbccm.com"
+    .Body = "Please find attached the updated comp sheet (priced as of " & emaildate & ")."
+    .Attachments.Add pubPDF
+    .Attachments.Add pubExcel
+    
+End With
+
+
+myMail.Send
+
+
+End Sub
+
 Public Sub RefreshWorkbook()
 Dim Refreshbutton As CommandBarButton
 Set Refreshbutton = Application.CommandBars.FindControl(Tag:="menurefreshdatabook")
@@ -6,15 +35,20 @@ End Sub
 
 
 Sub Auto_generate()
+
     Application.ScreenUpdating = False
     Application.DisplayStatusBar = False
     RefreshPrices_1
     RefreshWorkbook
     Create_pub_xlsx
     Create_pub_pdf
-    file_date = CStr(Format(Range("Q6"), "yyyymmdd"))
+    file_date = CStr(Format(ThisWorkbook.Worksheets("Prices").Range("Q6"), "yyyymmdd"))
+
     FName = "Comps - Consolidated_Working_" & file_date
+
     relativePath = ThisWorkbook.Path & "\" & FName
+    
+
     ThisWorkbook.SaveAs Filename:=relativePath
     AttachMultipleFilesToEmail
     Application.DisplayStatusBar = True
@@ -23,7 +57,7 @@ Sub Auto_generate()
 End Sub
 
 Sub Run_at_4_21()
-    Application.OnTime TimeValue("17:25:20"), "Auto_generate"
+    Application.OnTime TimeValue("16:21:00"), "Auto_generate"
     
     
 End Sub
