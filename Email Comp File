@@ -1,13 +1,3 @@
-'Sub AddAttachment()
-' Dim myItem As Outlook.MailItem
-' Dim myAttachments As Outlook.Attachments
-'
-' Set myItem = Application.CreateItem(olMailItem)
-'' Set myAttachments = myItem.Attachments
-'' myAttachments.Add "C:\Test.doc", _olByValue, 1, "Test"
-' myItem.Display
-'End Sub
-
 Sub AttachMultipleFilesToEmail()
 Dim outlookApp As Outlook.Application
 Dim myMail As Outlook.MailItem
@@ -15,7 +5,22 @@ Dim myMail As Outlook.MailItem
 Set outlookApp = New Outlook.Application
 Set myMail = outlookApp.CreateItem(olMailItem)
 
-myMail.Display
+mydate = CStr(Format(Date, "yyyymmdd"))
+emaildate = CStr(Format(Date, "mm/dd"))
+
+pubPDF = ThisWorkbook.Path & "\" & "Comps - Consolidated_Atkin_Pub " & mydate & ".pdf"
+pubExcel = ThisWorkbook.Path & "\" & "Comps - Consolidated_Atkin_Pub " & mydate & ".xlsx"
+
+With myMail
+    .Subject = "Comps Sheet " & emaildate
+    .To = "michael.j.tang@rbccm.com"
+    .Body = "Please find attached the updated comp sheet (priced as of " & emaildate & ")."
+    .Attachments.Add pubPDF
+    .Attachments.Add pubExcel
+End With
+
+
+myMail.Send
+
 
 End Sub
-
