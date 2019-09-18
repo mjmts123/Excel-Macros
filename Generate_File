@@ -16,6 +16,7 @@ Sub Auto_generate()
     FName = "Comps - Consolidated_Working_" & file_date
     relativePath = ThisWorkbook.Path & "\" & FName
     ThisWorkbook.SaveAs Filename:=relativePath
+    AttachMultipleFilesToEmail
     Application.DisplayStatusBar = True
     Application.ScreenUpdating = True
     
