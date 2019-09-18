@@ -1,0 +1,21 @@
+'Sub AddAttachment()
+' Dim myItem As Outlook.MailItem
+' Dim myAttachments As Outlook.Attachments
+'
+' Set myItem = Application.CreateItem(olMailItem)
+'' Set myAttachments = myItem.Attachments
+'' myAttachments.Add "C:\Test.doc", _olByValue, 1, "Test"
+' myItem.Display
+'End Sub
+
+Sub AttachMultipleFilesToEmail()
+Dim outlookApp As Outlook.Application
+Dim myMail As Outlook.MailItem
+
+Set outlookApp = New Outlook.Application
+Set myMail = outlookApp.CreateItem(olMailItem)
+
+myMail.Display
+
+End Sub
+
