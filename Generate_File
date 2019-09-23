@@ -31,6 +31,7 @@ Public Sub RefreshWorkbook()
 Dim Refreshbutton As CommandBarButton
 Set Refreshbutton = Application.CommandBars.FindControl(Tag:="menurefreshdatabook")
 Refreshbutton.Execute
+Refreshbutton.Execute
 End Sub
 
 
